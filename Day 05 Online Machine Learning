@@ -116,3 +116,36 @@ Online learning is essential when:
 
 ---
 
+### Code for Online Machine Learning...
+
+from sklearn.linear_model import SGDClassifier
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+import numpy as np
+
+# Simulate streaming data
+X, y = make_classification(n_samples=1000, n_features=20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Initialize online model
+model = SGDClassifier(loss="log_loss")  # Logistic Regression (online)
+
+# Let's simulate mini-batches of 100 samples
+batch_size = 100
+
+for i in range(0, len(X_train), batch_size):
+    X_batch = X_train[i:i+batch_size]
+    y_batch = y_train[i:i+batch_size]
+
+    # Important: must specify classes during first call
+    if i == 0:
+        model.partial_fit(X_batch, y_batch, classes=np.unique(y))
+    else:
+        model.partial_fit(X_batch, y_batch)
+
+    print(f"Trained on batch {i//batch_size + 1}")
+
+# Test accuracy
+accuracy = model.score(X_test, y_test)
+print(f"\nTest Accuracy: {accuracy:.4f}")
+
