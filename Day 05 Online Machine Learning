@@ -149,3 +149,40 @@ for i in range(0, len(X_train), batch_size):
 accuracy = model.score(X_test, y_test)
 print(f"\nTest Accuracy: {accuracy:.4f}")
 
+
+### Batch and Online machine Learning Comparison:
+
+# 🆚 Batch vs Online Machine Learning
+
+| Feature                        | 🧊 Batch Machine Learning                             | 🔄 Online Machine Learning                              |
+|-------------------------------|------------------------------------------------------|--------------------------------------------------------|
+| **Learning Style**            | Learns from the entire dataset at once               | Learns incrementally, one sample or mini-batch at a time |
+| **Data Requirement**          | Requires all training data available beforehand      | Works with real-time or streaming data                 |
+| **Model Updates**             | Trained once or periodically retrained               | Continuously updates with each new data point         |
+| **Adaptability**              | Poor at adapting to new patterns                     | Highly adaptive to changes in data (concept drift)     |
+| **Memory Usage**              | High (needs entire dataset in memory)                | Low (processes small parts at a time)                 |
+| **Computation Cost**          | Expensive for retraining                             | Computationally efficient per update                  |
+| **Speed of Learning**         | Slower (requires full training cycle)                | Fast (immediate updates possible)                     |
+| **Suitable For**              | Static data, stable environments                     | Dynamic data, changing environments                   |
+| **Examples**                  | Monthly customer churn prediction, image classifiers | Stock price prediction, fraud detection, live recommendations |
+| **Libraries**                 | scikit-learn, XGBoost                                | scikit-learn (`partial_fit`), River, Vowpal Wabbit     |
+| **Accuracy**                  | Often higher if retrained regularly                  | Can fluctuate; needs careful tuning                   |
+| **Debugging & Evaluation**    | Easier (fixed dataset)                              | Harder (data is not stored or repeated)               |
+| **Best When**                 | Data doesn't change often                            | Data is constantly changing or streamed               |
+
+---
+
+✅ **Quick Summary**:
+
+- Use **Batch Learning** when:
+  - Your dataset is static or changes slowly
+  - You have time and resources to retrain
+  - Accuracy and stability are more important than speed
+
+- Use **Online Learning** when:
+  - You deal with streaming or real-time data
+  - You need fast, continuous adaptation
+  - Memory or compute resources are limited
+
+
+
