@@ -1,0 +1,60 @@
+Resource : https://youtu.be/nPrhFxEuTYU?si=7t3qR2bqVOZuku_8
+
+# 🧠 Machine Learning Overview
+
+A concise reference covering key Machine Learning paradigms:
+
+- Batch Learning
+- Offline vs Online Learning
+
+---
+
+## 📦 Batch Machine Learning
+
+**Definition:**  
+Batch learning is a machine learning paradigm where the model is trained on the **entire dataset at once**. The system doesn't update continuously. Instead, it's retrained periodically with a new batch of data.
+
+### 🔹 Characteristics:
+- Learns from the full dataset
+- Not updated in real-time
+- Typically more accurate due to full data availability
+- High computational load
+- Training and inference are separated phases
+
+### ✅ Real-Life Examples:
+- Predicting housing prices using a historical dataset
+- Fraud detection models retrained weekly
+- E-commerce recommendation models updated nightly
+- Customer churn prediction trained monthly
+
+---
+
+## 🔁 Offline Learning vs Online Learning
+
+### 🧊 Offline Learning (Static)
+
+**Definition:**  
+Also known as batch learning. The model is trained on static data and then deployed for inference. No updates happen during prediction.
+
+#### ✅ Use Cases:
+- Image classification models trained on labeled datasets
+- Monthly retrained recommendation systems
+- Fraud models updated weekly
+
+---
+
+### 🔄 Online Learning (Dynamic)
+
+**Definition:**  
+Online learning is a machine learning approach where the model learns **continuously from streaming data**, updating incrementally.
+
+#### 🔹 Characteristics:
+- Learns one data point at a time
+- Suitable for real-time systems
+- Can adapt to concept drift (changes in data patterns)
+
+#### ✅ Real-Life Examples:
+- Stock price prediction systems
+- Real-time click-through rate (CTR) prediction
+- Dynamic pricing engines
+- Live recommendation systems on streaming platforms
