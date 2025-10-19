@@ -1,0 +1,131 @@
+# 🎥 Netflix Movie Recommendation System
+
+## 🧩 Project Overview
+Netflix aims to increase user engagement by recommending the most relevant content.  
+As an ML Engineer, our goal is to **predict what movie or series a user will watch next** based on their past behavior.
+
+---
+
+## 🏢 Business Problem
+
+Netflix users spend less time discovering new shows.  
+Goal: **Increase watch time and reduce churn** by improving personalized recommendations.
+
+---
+
+## 🔍 ML Problem Formulation
+
+| Step | Description |
+|------|--------------|
+| **Type of Problem** | Recommendation / Ranking |
+| **Target Variable (y)** | Probability that a user will watch a movie |
+| **Input Features (X)** | User history, genre preferences, device type, time of day, watch duration, similar users |
+| **Prediction Goal** | Rank top-N movies for each user |
+
+---
+
+## 📊 Data Sources
+
+| Source | Description |
+|---------|--------------|
+| User Behavior Logs | Movie IDs, ratings, watch duration |
+| Content Metadata | Genre, cast, release year, tags |
+| User Profile | Age, country, device, subscription type |
+
+---
+
+## ⚙️ Current Solution
+
+Currently, Netflix uses collaborative filtering and deep learning models (e.g., **Matrix Factorization**, **Autoencoders**, **Transformer-based recommenders**) to rank items.  
+Our prototype improves upon this by combining **content-based** + **collaborative** features.
+
+---
+
+## 📈 Evaluation Metrics
+
+| Metric | Description |
+|---------|--------------|
+| Precision@K | How many of top-K recommendations are relevant |
+| Recall@K | How many relevant items are recommended |
+| NDCG | Normalized Discounted Cumulative Gain (ranking quality) |
+| Watch Time | Business metric to measure success post-deployment |
+
+---
+
+## 🧪 Assumptions
+
+- User history data available for past 6 months.  
+- Cold-start problem handled via content features.  
+- No data leakage from future events.
+
+---
+
+## 🔁 System Design
+
+### Offline (Batch)
+- Train model daily on Spark or PyTorch.
+- Store embeddings in feature store.
+
+### Online (Real-time)
+- Fetch pre-computed recommendations or refresh on user action.
+
+---
+
+## 🧠 Model Options
+
+1. **Collaborative Filtering (Matrix Factorization)**
+2. **Neural Collaborative Filtering (NCF)**
+3. **Transformer-based Sequential Models**
+4. **Hybrid Recommender (Content + CF)**
+
+---
+
+## 🧩 Pipeline Overview
+
+Raw Data → Feature Engineering → Train/Test Split → Model Training → Evaluation → Deployment → Monitoring
+
+---
+
+## 🚀 Deployment Plan
+
+- Model served via **FastAPI** endpoint.  
+- Batch inference with **Airflow** scheduler.  
+- Model tracking with **MLflow**.  
+- Results visualized on dashboard (Streamlit).
+
+---
+
+## 📦 Tech Stack
+
+| Component | Technology |
+|------------|-------------|
+| Data | Spark, Pandas |
+| Model | PyTorch / TensorFlow |
+| Deployment | FastAPI, Docker |
+| Monitoring | Prometheus, Grafana |
+
+---
+
+## ✅ Results
+
+| Metric | Before | After (Our Model) |
+|--------|--------|-------------------|
+| Precision@10 | 0.21 | 0.35 |
+| Recall@10 | 0.42 | 0.58 |
+| Watch Time ↑ | +18% |
+
+---
+
+## 📚 Future Work
+
+- Handle cold-start users via demographic embedding.
+- Introduce context-aware recommendations (time, mood).
+- Real-time personalization using reinforcement learning.
+
+---
+
+## ✍️ Author
+Bikrom Roy – Machine Learning Engineer  
+🚀 Passionate about building intelligent data-driven systems.
+
+
