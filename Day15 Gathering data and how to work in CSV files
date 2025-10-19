@@ -1,0 +1,223 @@
+# 📊 Data Collection in Machine Learning Projects
+
+In real-world ML projects, collecting high-quality data is **the most critical step**. Data can come from **multiple sources**: files, databases, APIs, and web scraping.
+
+---
+
+## 1️⃣ Gathering Data from Files (CSV, JSON, Excel)
+
+### **CSV**
+
+* **Python Libraries**: `pandas`, `csv`
+* **Example**:
+
+```python
+import pandas as pd
+
+# Load CSV
+data = pd.read_csv('data/netflix_users.csv')
+print(data.head())
+```
+
+### **JSON**
+
+* **Python Libraries**: `pandas`, `json`
+* **Example**:
+
+```python
+import pandas as pd
+
+# Load JSON
+data = pd.read_json('data/netflix_movies.json')
+print(data.head())
+```
+
+### **Excel**
+
+* **Python Libraries**: `pandas`, `openpyxl`
+* **Example**:
+
+```python
+data = pd.read_excel('data/netflix_ratings.xlsx', sheet_name='Sheet1')
+print(data.head())
+```
+
+---
+
+## 2️⃣ Gathering Data from SQL Databases
+
+* **Common Databases**: MySQL, PostgreSQL, SQLite, SQL Server
+* **Python Libraries**: `sqlalchemy`, `psycopg2`, `sqlite3`, `pandas`
+
+**Example (PostgreSQL)**:
+
+```python
+from sqlalchemy import create_engine
+import pandas as pd
+
+# Connect to database
+engine = create_engine('postgresql://username:password@localhost:5432/netflixdb')
+
+# Query data
+query = "SELECT * FROM user_watch_history;"
+data = pd.read_sql(query, engine)
+print(data.head())
+```
+
+---
+
+## 3️⃣ Fetching Data from APIs
+
+APIs allow real-time access to external data.
+
+* **Python Libraries**: `requests`, `httpx`
+* **Example (Open Movie Database API)**:
+
+```python
+import requests
+import pandas as pd
+
+api_url = "http://www.omdbapi.com/?apikey=YOUR_API_KEY&t=Inception"
+response = requests.get(api_url)
+data = response.json()
+
+# Convert to DataFrame
+df = pd.DataFrame([data])
+print(df.head())
+```
+
+* **Tips**:
+
+  * Always check API rate limits.
+  * Handle errors with `try-except`.
+  * For large datasets, paginate requests.
+
+---
+
+## 4️⃣ Web Scraping
+
+* **Python Libraries**: `BeautifulSoup`, `requests`, `Selenium`, `Scrapy`
+* **Example (scraping Netflix movie titles)**:
+
+```python
+import requests
+from bs4 import BeautifulSoup
+
+url = 'https://www.example.com/netflix-movies'
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+
+movies = []
+for movie in soup.find_all('div', class_='movie-title'):
+    movies.append(movie.text)
+
+print(movies[:10])
+```
+
+* **Best Practices**:
+
+  * Respect `robots.txt`.
+  * Avoid sending too many requests at once.
+  * Use proxies if needed.
+  * Handle dynamic content using Selenium.
+
+---
+
+## 5️⃣ Real-Life Netflix Project: Data Collection Section
+
+Here’s how you would document it in **GitHub Markdown** for your repo:
+
+````markdown
+# 📁 Netflix Recommendation System - Data Collection
+
+## Overview
+Collecting high-quality data is the foundation of a Netflix movie recommendation system.  
+Data is collected from multiple sources: **CSV, JSON, SQL Database, APIs, and Web Scraping**.
+
+---
+
+## 1️⃣ CSV / Excel Data
+- **Users Data**: `netflix_users.csv` (user id, subscription, country)
+- **Ratings Data**: `netflix_ratings.xlsx` (user id, movie id, rating)
+- **Movies Metadata**: `netflix_movies.json` (movie id, genre, release year)
+
+**Example**:
+```python
+import pandas as pd
+
+users = pd.read_csv('data/netflix_users.csv')
+movies = pd.read_json('data/netflix_movies.json')
+ratings = pd.read_excel('data/netflix_ratings.xlsx')
+````
+
+---
+
+## 2️⃣ SQL Database
+
+* **Database**: PostgreSQL (`netflixdb`)
+* **Table**: `user_watch_history`
+* **Columns**: user_id, movie_id, watch_duration, timestamp
+
+**Example**:
+
+```python
+from sqlalchemy import create_engine
+import pandas as pd
+
+engine = create_engine('postgresql://username:password@localhost:5432/netflixdb')
+history = pd.read_sql("SELECT * FROM user_watch_history;", engine)
+```
+
+---
+
+## 3️⃣ APIs
+
+* **OMDb API** for fetching movie details (genre, ratings, release year)
+
+```python
+import requests
+import pandas as pd
+
+api_url = "http://www.omdbapi.com/?apikey=YOUR_API_KEY&t=Inception"
+response = requests.get(api_url)
+data = response.json()
+movies_df = pd.DataFrame([data])
+```
+
+---
+
+## 4️⃣ Web Scraping
+
+* Scraping Netflix-like movie titles from external movie database websites
+
+```python
+import requests
+from bs4 import BeautifulSoup
+
+url = 'https://www.example.com/netflix-movies'
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+
+movies = [movie.text for movie in soup.find_all('div', class_='movie-title')]
+```
+
+**Notes**:
+
+* Follow `robots.txt` rules
+* Respect request limits
+* Handle dynamic pages using Selenium
+
+---
+
+## 5️⃣ Dataset Summary
+
+| Source       | Type       | Sample Columns                               |
+| ------------ | ---------- | -------------------------------------------- |
+| CSV          | Tabular    | user_id, country, subscription               |
+| Excel        | Tabular    | user_id, movie_id, rating                    |
+| JSON         | Tabular    | movie_id, genre, release_year                |
+| SQL          | Relational | user_id, movie_id, watch_duration, timestamp |
+| API          | JSON       | title, genre, director, ratings              |
+| Web Scraping | HTML       | movie titles, genre, release year            |
+
+```
